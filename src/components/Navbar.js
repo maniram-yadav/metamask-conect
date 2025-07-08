@@ -1,12 +1,12 @@
 import { ethers } from 'ethers';
 
-function NavBar({ account, setAccount , metamaskInstalled}) {
+function NavBar({ account, setAccount , metamaskInstalled, loadBalance}) {
 
       const connectHandler = async () => {
-        
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const account = ethers.utils.getAddress(accounts[0])
             setAccount(account);
+            loadBalance(account);
         }
         
     return (<nav className="p-10">
