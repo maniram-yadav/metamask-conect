@@ -59,6 +59,8 @@ function App() {
         metamaskInstalled={metamaskinstalled} loadBalance={loadBalance}>
 
       </NavBar>
+      <div className='font-bold text-center pt-5'>
+        This is Metamask test App to check the Metamask Connection Functionality</div>
       <Profile account={account} balance={balance}></Profile>
     </div>
   );
