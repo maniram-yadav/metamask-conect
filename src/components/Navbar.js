@@ -9,17 +9,17 @@ function NavBar({ account, setAccount , metamaskInstalled, loadBalance}) {
             loadBalance(account);
         }
         
-    return (<nav className="p-10">
-        <div className="flex flex-col sm:flex-row sm:nowrap bg-black p-10 w-full
-                h-10 text-white justify-center items-center m-10">
+    return (<nav className="">
+        <div className="flex flex-col sm:flex-row flex-cols-1 sm:nowrap bg-black p-10 min-w-full
+                h-10 text-white justify-center items-center">
             
             { metamaskInstalled ? (<div>
             {account ? (
-                 <div>
-                    {account}
+                 <div className='text-gray-300'>
+                    Account Connected
                 </div>
             ) : (
-                 <button type="button" className="font-bold txt-lg cursor-pointer hover:text-gray-200
+                 <button type="button" className="font-bold text-lg cursor-pointer text-green-100 hover:text-gray-200
                border-0 ml-5"  onClick={connectHandler}>Connect</button>
                 
             )}

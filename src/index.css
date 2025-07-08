@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-white: #FFFFFF;
+  --clr-black: #202020;
+  --clr-grey: #707070;
+  --clr-blue: #6C63FF;
+  --clr-blue-2: #4c46b6;
+  --clr-green: #4fb646;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
