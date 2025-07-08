@@ -7,10 +7,10 @@ function Profile({ account, balance }) {
                 top-10 bg-gray-700 p-20 rounding-[40px]">
                 <div className="absolute top-20 left-20 text-white z-20">
                     {
-        (!account || !balance) ? (<div className="font-bold text-2xl">Account not connected</div>) : (
+        (!account && !balance) ? (<div className="font-bold text-2xl">Account not connected</div>) : (
                     <div>
                     {account ? (<div>Account : {account}</div>) : ('')}
-                    {balance ? (<div>Balance : {balance} ETH</div>) : ('')}
+                    {account ? (<div>Balance : {balance} ETH</div>) : ('')}
                     </div>
                 )}
                 </div>

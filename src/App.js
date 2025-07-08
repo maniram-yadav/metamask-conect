@@ -6,25 +6,32 @@ import { ethers } from 'ethers';
 function App() {
 
   const [account, setAccount] = useState(null)
-  const [provider, setProvider] = useState(null)
+  // const [provider, setProvider] = useState(null)
   const [metamaskinstalled, setIsMetaMaskInstalled] = useState(null)
   const [balance, setBalance] = useState(null)
+  let provider = null;
 
-    
-  async function loadBalance(account){
-            if(account!=null && provider!=null){
-                    let balanceInWei = await provider.getBalance(account);
-                    const eth_Balance = ethers.BigNumber.from(balanceInWei._hex);
-                    let b = ethers.utils.formatEther(eth_Balance);
-                    setBalance(b);
-            }
-  }  
+  async function loadBalance(account) {
+
+    if (!provider) {
+      provider = await loadProvider();
+    }
+    console.log(provider);
+    if (account != null && provider != null) {
+      let balanceInWei = await provider.getBalance(account);
+      const eth_Balance = ethers.BigNumber.from(balanceInWei._hex);
+      let b = ethers.utils.formatEther(eth_Balance);
+      console.log(b);
+      setBalance(b);
+    }
+  }
+  const loadProvider = async () => {
+    const pr = new ethers.providers.Web3Provider(window.ethereum)
+    // setProvider(pr);
+    return pr;
+  }
 
   const loadData = async () => {
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(provider)
-    const network = await provider.getNetwork()
 
     window.ethereum.on('accountsChanged', async (accounts) => {
       if (accounts === null || accounts.length === 0) {
@@ -32,19 +39,18 @@ function App() {
         setAccount(null);
         setBalance(null);
       } else {
-        const account = ethers.utils.getAddress(accounts[0])
-        setBalance(0.0);
-        console.log(account);
-        setAccount(account);
-        loadBalance(account);
+        const acc = ethers.utils.getAddress(accounts[0])
+        setAccount(acc);
+        loadBalance(acc);
       }
     });
-    
+
   }
 
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
       setIsMetaMaskInstalled(true);
+      loadProvider();
       loadData();
     } else {
       setIsMetaMaskInstalled(false);
